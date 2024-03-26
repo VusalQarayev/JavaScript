@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en,az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- task1 -->
+    <!-- <script>
+        var array = [1, 3, 10, 15, 20, 25, 30, 35, 40, 45, 50];
+        var count = 0;
+     
+        for (var i = 0; i < array.length; i++) {
+            if (array[i] % 2 === 0) {
+            }
+            else{
+                count++;
+            }
+        }
+    
+        alert("tek ededler "+ count)
+    </script> -->
+
+
+
+    <!-- task2 -->
+    <!-- <script>
+        var array = [1, 3, 10, 15, 20, 25, 30, 35, 40, 45, 50];
+        var count = 0;
+     
+        for (var i = 0; i < array.length; i++) {
+            if (array[i] % 5 === 0) {
+                count++;
+            }
+        }
+    
+        alert("5-e bolunen ededler "+ count)
+    </script> -->
+
+
+
+    <!-- task3 -->
+    <!-- <script>
+        function isPrime(number) {
+            // Ədəd 1-dən kiçiksə sadə deyil
+            if (number < 2) {
+                return false;
+            }
+            // Ədəd 2-yə tam bölünürsə sadədir
+            else if (number === 2) {
+                return true;
+            }
+            // Ədəd ədədə tam bölünmədikdə sadədir
+            else {
+                for (var i = 2; i <= Math.sqrt(number); i++) {
+                    if (number % i === 0) {
+                        return false;
+                    }
+                }
+                return true;
+            }
+        }
+    
+        var num = parseInt(prompt("Bir ədəd daxil edin:"));
+    
+        if (isPrime(num)) {
+            document.write(num + " ədədi sadədir.");
+        } else {
+            document.write(num + " ədədi mürəkkəbdir.");
+        }
+    </script> -->
+
+
+
+    <!-- task4 -->
+    <!-- <script>
+        var array = [3, 14, 21, 35, 42, 49, 56, 63, 70, 77];
+        var divide7 = null;
+        // null deyisenin heleki qiymeti yoxdur amma sonradan qiymet ala biler
+
+        // 7-ye bolunen ededleri tapma
+        for (var i = array.length - 1; i >= 0; i--) {
+            if (array[i] % 7 === 0) {
+                divide7 = array[i];
+                break;
+            }
+        }
+    
+        // 7-ye bolunen sonuncu ededi ekrana vermek
+        if (divide7 !== null) {
+            document.write("Sonuncu 7-ə bölünən ədəd: " + divide7);
+        } else {
+            document.write("Array-də 7-ə bölünən heç bir ədəd yoxdur.");
+        }
+    </script> -->
+
+
+
+    <!-- task5 -->
+    <!-- <script>
+        var array = [12, 5, 23, 4, 9, 17, 6, 30, 8, 21];
+        var max = array[0];
+        var min = array[0];
+    
+        // maksimum ve minimum elementleri tapmaq
+        for (var i = 1; i < array.length; i++) {
+            if (array[i] > max) {
+                max = array[i];
+            }
+            if (array[i] < min) {
+                min = array[i];
+            }
+        }
+    
+        alert("Ən böyük element: " + max);
+        alert("Ən kiçik element: " + min);
+    </script> -->
+
+
+
+    <!-- task6 -->
+    <!-- <script>
+        var array = [2, 5, 23, 4, 9, 17, 6, 30, 8, 51];
+    
+        // max ve min elementlerin indeksin tapmaq
+        var maxIndex = 0;
+        var minIndex = 0;
+        for (var i = 1; i < array.length; i++) {
+            if (array[i] > array[maxIndex]) {
+                maxIndex = i;
+            }
+            if (array[i] < array[minIndex]) {
+                minIndex = i;
+            }
+        }
+    
+        // max ve min elementlerin yerini deyismek
+        var temp = array[maxIndex];
+        array[maxIndex] = array[minIndex];
+        array[minIndex] = temp;
+    
+        // Yerini deyismis array
+        for (var j = 0; j < array.length; j++) {
+            document.write(array[j] + " ");
+        }
+    </script> -->
+
+
+
+    <!-- task7 -->
+    <!-- <h2>Ədədin Bölənlərin tapmaq</h2>
+    <input type="number" id="eded">
+    <p>Bir ədəd daxil edin və aşağıdakı düyməyə basın:</p>
+    <div id="netice"></div>
+    <button onclick="ekrana_cixar()">Bölənləri Tap</button>
+    <script>
+        function butun_bolunenler(eded) {
+            var bolunenler = [];
+            for (var i = 1; i <= eded; i++) {
+                if (eded % i === 0) {
+                    bolunenler.push(i);
+                }
+            }
+            return bolunenler;
+        }
+        
+        function ekrana_cixar() {
+            var eded = document.getElementById("eded").value;
+            var bolunenler = butun_bolunenler(parseInt(eded));
+            var output = eded + " ədədin bütün mümkün bölənləri: ";
+            output += bolunenler.join(", ");
+            document.getElementById("netice").innerHTML = output;
+        }
+        </script> -->
+
+
+
+        <!-- task8 -->
+        <!-- <script>
+            function ixtiyari_eded() {
+                var array = [10, 29, 32, 40, 54, 22, 1, 24, 17, 7, 86, 44, 46]; 
+                var randomIndex = Math.floor(Math.random() * array.length); // Arrayin uzunluğuna əsasən təsadüfi bir index seçir
+                var randomElement = array[randomIndex]; // Seçilmiş təsadüfi element
+                alert("Ixtiyari ədəd: " + randomElement);
+            }
+        </script>
+        <button onclick="ixtiyari_eded()">Ixtiyari Ədədi Ekrana Çıxar</button> -->
+
+
+
+        <!-- task9 -->
+        <!-- <script>
+            for (var i = 1; i <= 100; i++) {
+                if (i % 10 === 1) { 
+                    console.log(i);
+                }
+            }
+        </script> -->
+
+
+
+        <!-- task10 -->
+        <!-- <script>
+            function polindrom_yoxla(ifade) {
+                // İfadeyi təmizləmək üçün bütün boşluqları silirik və bütün hərfi kiçikə çeviririk
+                ifade = ifade.toLowerCase().replace(/\s/g, '');
+                var ters_ifade = ifade.split('').reverse().join('');
+                return (ifade === ters_ifade);
+            }
+            
+            var daxil_edilen_ifade = prompt("Polindrom olub-olmadığını yoxlamaq üçün bir ifadə daxil edin:");
+            if (daxil_edilen_ifade !== null) {
+                if (polindrom_yoxla(daxil_edilen_ifade)) {
+                    alert("Daxil etdiyiniz ifadə bir polindromdur.");
+                } else {
+                    alert("Daxil etdiyiniz ifadə bir polindrom deyil.");
+                }
+            }
+            </script> -->
+
+
+
+        <!-- task11 -->
+        <!-- <script>
+            function anaqram_yoxla(soz1, soz2) {
+                // Her iki sözü küçük harflərə çeviririk və simvolların sayısını sayırıq
+                var sayac1 = {};
+                var sayac2 = {};
+            
+                soz1 = soz1.toLowerCase();
+                soz2 = soz2.toLowerCase();
+            
+                // İlk sözdəki hər bir simvolun sayını hesablayırıq
+                for (var harf of soz1) {
+                    if (harf !== " ") {
+                        sayac1[harf] = (sayac1[harf] || 0) + 1;
+                    }
+                }
+            
+                // İkinci sözdəki hər bir simvolun sayını hesablayırıq
+                for (var harf of soz2) {
+                    if (harf !== " ") {
+                        sayac2[harf] = (sayac2[harf] || 0) + 1;
+                    }
+                }
+            
+                // İki sözün simvollarının sayısı eyni olmalıdır
+                if (Object.keys(sayac1).length !== Object.keys(sayac2).length) {
+                    return false;
+                }
+            
+                // Her bir simvolun sayısı eyni olmalıdır
+                for (var harf in sayac1) {
+                    if (sayac1[harf] !== sayac2[harf]) {
+                        return false;
+                    }
+                }
+            
+                return true;
+            }
+            
+            var soz1 = prompt("Birinci sözü daxil edin:");
+            var soz2 = prompt("İkinci sözü daxil edin:");
+            
+            // true olsa if yerine yetirir false olsa else
+            if (anaqram_yoxla(soz1, soz2)) {
+                alert("Daxil etdiyiniz sözlər anaqramdır.");
+            } else {
+                alert("Daxil etdiyiniz sözlər anaqram deyil.");
+            }
+            </script> -->
+
+
+            <!-- task12 -->
+            <!-- <script>
+                function yeni_array_yarad(birinci_array, ikinci_array) {
+                    var yeni_array = [];
+                    for (var i = 0; i < birinci_array.length; i++) {
+                        yeni_array.push(birinci_array[i] * ikinci_array[i]);
+                    }
+                    return yeni_array;
+                }
+                
+                var birinci_array = [2, 5];
+                var ikinci_array = [3, 6];
+                
+                var yeni_array = yeni_array_yarad(birinci_array, ikinci_array);
+                console.log(yeni_array);
+            </script> -->
+
+
+
+
+            <!-- task13 -->
+            <!-- <script>
+                function saitleri_sil(metn) {
+                    var saitsiz_metn = "";
+                    // Mətnin hər bir simvolunu yoxlayırıq
+                    for (var i = 0; i < metn.length; i++) {
+                        // Hər bir simvolun kiçik hərfə çevrilməsi
+                        var simvol = metn[i].toLowerCase();
+                        // !== simvollar saitlərə bərabər olmasın
+                        if (simvol !== 'a' && simvol !== 'e' && simvol !== 'i' && simvol !== 'o' && simvol !== 'u' && simvol !== 'ə' && simvol !== 'ö' && simvol !== 'ü' && simvol !== 'ı') {
+                            saitsiz_metn += metn[i];
+                        }
+                    }
+                    return saitsiz_metn;
+                }
+                
+                var daxil_edilen_metn = prompt("Mətni daxil edin:");
+                if (daxil_edilen_metn !== null) {
+                    var saitsiz_metn = saitleri_sil(daxil_edilen_metn);
+                    alert("Saitləri silinmiş mətn: \n" + saitsiz_metn);
+                }
+                </script> -->
+                <!-- task14 -->
+
+
+
+
+                <!-- <script>
+                    function string_ifade_yarat(simvol_sayi) {
+                        var simvollar = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+                        var uzunluq = simvollar.length;
+                        var ifade = "";
+                    
+                        for (var i = 0; i < simvol_sayi; i++) {
+                            var random_index = Math.floor(Math.random() * uzunluq);
+                            ifade += simvollar.charAt(random_index);
+                        }
+                    
+                        return ifade;
+                    }
+                    
+                    var simvol_sayi = parseInt(prompt("İstifadəçi daxil etdiyi ədəd sayda simvol daxil edin:"));
+                    
+                    if (!isNaN(simvol_sayi) && simvol_sayi > 0) {
+                        var yeni_ifade = string_ifade_yarat(simvol_sayi);
+                        alert("Yaradılan string ifadə: \n" + yeni_ifade);
+                    } else {
+                        alert("Düzgün bir ədəd daxil edilməyib!");
+                    }
+                    </script> -->
+
+
+
+                    <!-- task15 -->
+                    <!-- <script>
+                        function ədədi_orta_tap(arr) {
+                            var cem = 0;
+                            for (var i = 0; i < arr.length; i++) {
+                                cem += arr[i];
+                            }
+                            return cem / arr.length;
+                        }
+                        
+                        var eded = [4, 7, 10, 15, 20];
+                        var ededi_orta = ədədi_orta_tap(eded);
+                        alert("Ədədlərin ədədi ortası: " + ededi_orta);
+                    </script> -->
+
+
+
+                    <!-- task16 -->
+                    <!-- <script>
+                        function sait_ve_samit_sayini_tap(metn) {
+                            var sait_sayi = 0;
+                            var samit_sayi = 0;
+                        
+                            metn = metn.toLowerCase(); // Sözdəki hərfləri kiçikə çeviririk
+                        
+                            for (var i = 0; i < metn.length; i++) {
+                                var herf = metn[i];
+                                // Hərf sait və ya samit olduğunu yoxlayırıq
+                                if (herf >= 'a' && herf <= 'z') {
+                                    if (herf === 'a' || herf === 'e' || herf === 'i' || herf === 'o' || herf === 'ə' || herf === 'ö' || herf === 'ü' || herf === 'ı') {
+                                        sait_sayi++;
+                                    } else {
+                                        samit_sayi++;
+                                    }
+                                }
+                            }
+                        
+                            return { sait: sait_sayi, samit: samit_sayi };
+                        }
+                        
+                        var metn = prompt("Bir söz daxil edin:");
+                        if (metn !== null) {
+                            var sayilar = sait_ve_samit_sayini_tap(metn);
+                            alert("Sait sayı: " + sayilar.sait + "\nSamit sayı: " + sayilar.samit);
+                        }
+                        </script> -->
+
+                    
+
+                        <!-- task17 -->
+                        <!-- <script>
+                        function mukemmelEdedYoxla(eded) {
+                            if (eded <= 0) {
+                                return false; // Mükəmməl ədəd olmaq üçün 0-dan böyük olmalıdır
+                            }
+                        
+                            let bolenlerinCemi = 0;
+                            for (let i = 1; i <= eded / 2; i++) {
+                                if (eded % i === 0) {
+                                    bolenlerinCemi += i;
+                                }
+                            }
+                        
+                            return bolenlerinCemi === eded;
+                        }
+                        
+                        // İstifadəçidən ədəd daxil etməsini tələb edir və mükəmməl ədəd olub olmadığını yoxlayır
+                        let eded = parseInt(prompt("Bir ədəd daxil edin:"));
+                        if (!isNaN(eded)) {
+                            if (mukemmelEdedYoxla(eded)) {
+                                alert(eded + " mükəmməl ədəddir.");
+                            } else {
+                                alert(eded + " mükəmməl ədəd deyil.");
+                            }
+                        } else {
+                            alert("Düzgün ədəd daxil etmədiniz.");
+                        }
+                        </script> -->
+
+
+                        <!-- task18 -->
+                        <!-- <script>
+                            function reqemlerinCemi(eded) {
+                                let cem = 0;
+                                while (eded) {
+                                    cem += eded % 10;
+                                    eded = Math.floor(eded / 10);
+                                }
+                                return cem;
+                            }
+                            
+                            // İstifadəçidən ədəd daxil etməsini tələb edir və rəqəmlərin cəmini hesablayır
+                            let eded = parseInt(prompt("Bir ədəd daxil edin:"));
+                            if (!isNaN(eded)) {
+                                let cem = reqemlerinCemi(eded);
+                                alert("Rəqəmlərin cəmi: " + cem);
+                            } else {
+                                alert("Düzgün ədəd daxil etmədiniz.");
+                            }
+                            </script> -->
+
+
+                            <!-- task19 -->
+                            <!-- <script>
+                                function Substring(metn, baslangic, son) {
+                                    // Başlanğıc dəyəri mənfi olduğu halda, başlanğıcı 0-a təyin edin
+                                    if (baslangic < 0) {
+                                        baslangic = 0;
+                                    }
+                                    
+                                    // Son dəyəri müəyyən edilməmişsə və ya verilmiş son dəyəri metnin uzunluğundan böyükdirsə, sona qədər götürün
+                                    if (son === undefined || son > metn.length) {
+                                        son = metn.length;
+                                    }
+                                    
+                                    // Başlanğıc dəyəri son dəyərindən böyükdürsə, başlanğıcı son dəyərinə bərabər edin
+                                    if (baslangic > son) {
+                                        baslangic = son;
+                                    }
+                                
+                                    let netice = '';
+                                    for (let i = baslangic; i < son; i++) {
+                                        netice += metn[i];
+                                    }
+                                    return netice;
+                                }
+                                
+                                // Nümunə istifadə
+                                const metn = "Bu bir nümunədir.";
+                                const altMetn = Substring(metn, 3, 9); // Başlanğıc indeksi 3, son indeksi 9
+                                console.log(altMetn); // Çıxış: "bir nü"
+                                </script> -->
+
+
+
+                                <!-- task20 -->
+                                <!-- <script>
+                                    function ozelIndexOf(metn, ara, baslangic = 0) {
+                                        // Başlangıç indeksi negativdirsə, başlangıcı 0'a təyin edin
+                                        if (baslangic < 0) {
+                                            baslangic = 0;
+                                        }
+                                    
+                                        // Aranacaq ifadənin uzunluğu 0-dan böyükdürsə və başlanğıc indeksi metn uzunluğundan böyükdürsə, -1 qaytarın
+                                        if (ara.length === 0 || baslangic >= metn.length) {
+                                            return -1;
+                                        }
+                                    
+                                        for (let i = baslangic; i <= metn.length - ara.length; i++) {
+                                            let j;
+                                            for (j = 0; j < ara.length; j++) {
+                                                if (metn[i + j] !== ara[j]) {
+                                                    break;
+                                                }
+                                            }
+                                            if (j === ara.length) {
+                                                return i;
+                                            }
+                                        }
+                                        return -1;
+                                    }
+                                    
+                                    // Nümunə istifadə
+                                    const metn = "Bu bir nümunədir.";
+                                    const ara = "bir";
+                                    const indeks = ozelIndexOf(metn, ara);
+                                    console.log(indeks); // Çıxış: 3
+                                    </script> -->
+                        
+                               
+</body>
+</html>

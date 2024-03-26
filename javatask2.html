@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- task1
+    <h2>Vergul isaresi ile ayrilmis array elementleri daxil edin:</h2>
+    <input type="text" id="input">
+    <button onclick="findSum()">Cemi hesabla</button> 
+     hasili heabla -->
+    <!-- <p id="result"></p>
+    <script>
+        function findSum() {
+            var userInput = document.getElementById("input").value;
+            
+            var array = userInput.split(",").map(function(item) {
+                return parseInt(item, 10);
+            });
+            
+            // Array elementlerin cemi, hasilinde =0 yerine 1 yazilacaq ve + * ile evez olunacaq
+            var sum = 0;
+            for (var i = 0; i < array.length; i++) {
+                sum += array[i];
+            }
+            
+            // Ekrana cixan netice
+            document.getElementById("result").innerHTML = "Array elementlerin cemi: " + sum;
+        }
+    </script> -->
+    <!-- task2 -->
+    <!-- <h2>Vergul isaresi ile arraylari daxil edin:</h2>
+    <textarea id="input" rows="4" cols="50"></textarea>
+    <button onclick="removeDuplicates()">Tekrarlananlari sil</button>
+    <p id="result"></p>
+    <script>
+        function removeDuplicates() {
+            var userInput = document.getElementById("input").value;
+            
+            var arrayOfStrings = userInput.split("\n");
+            
+            var resultArray = [];
+            
+            for (var i = 0; i < arrayOfStrings.length; i++) {
+
+                var currentArray = arrayOfStrings[i].split(",");
+
+                var uniqueArray = [];
+                
+                for (var j = 0; j < currentArray.length; j++) {
+                    if (uniqueArray.indexOf(currentArray[j]) === -1) {
+                        uniqueArray.push(currentArray[j]);
+                    }
+                }
+                
+                resultArray.push(uniqueArray);
+            }
+            
+            document.getElementById("result").innerHTML = "Array tekrarlanan elementleri olmayan: " + (resultArray);
+        }
+    </script> -->
+    <!-- task3 -->
+    <!-- <h2>Array daxil edin her bir element Vergul ile ayrilir:</h2>
+    <textarea id="input" rows="4" cols="50"></textarea>
+    <button onclick="removeNonNumeric()">Eded olmayanlari sil</button>
+    <p id="result"></p>
+    <script>
+        function removeNonNumeric() {
+            var userInput = document.getElementById("input").value;
+            
+            var arrayOfStrings = userInput.split("\n");
+            
+            var resultArray = [];
+            
+            for (var i = 0; i < arrayOfStrings.length; i++) {
+
+                var currentArray = arrayOfStrings[i].split(",");
+                
+                var numericArray = [];
+                
+                for (var j = 0; j < currentArray.length; j++) {
+                    // Array elementlerin eded olmasini yoxlamaq
+                    if (!isNaN(parseFloat(currentArray[j]))) {
+                        // Eger ededdirse onda push edirik numericArray
+                        numericArray.push(parseFloat(currentArray[j]));
+                    }
+                }
+                
+                // Sonra numericArray push edirik resultArray
+                resultArray.push(numericArray);
+            }
+            
+            // Display the result
+            document.getElementById("result").innerHTML = "Eded olmayanlar silinmis Array: " + (resultArray);
+        }
+    </script> -->
+    <!-- task4 -->
+    <!-- <script>
+        var originalWord = prompt();
+        var reversed = reverseWord(originalWord);
+        console.log("Original word:", originalWord);
+        console.log("Reversed word:", reversed);
+        function reverseWord(word) {
+    /
+    var letters = word.split('');
+    
+    var reversedLetters = letters.reverse();
+    
+    var reversedWord = reversedLetters.join('');
+    
+    return reversedWord;
+}
+
+    </script> -->
+    <!-- task5 -->
+    <!-- <script>
+        var originalSentence = prompt();
+        var reversed = reverseSentence(originalSentence);
+        console.log("Reversed sentence:", reversed);
+        console.log("Original sentence:", originalSentence);
+        function reverseSentence(sentence) {
+            var words = sentence.split(' ');
+            
+            var reversedWords = words.reverse();
+    
+            var reversedSentence = reversedWords.join(' ');
+    
+            return reversedSentence;
+            
+}
+    </script> -->
+    <!-- task6 -->
+    <!-- <script>
+     let input = prompt('Eded daxil edin: ');
+     const inputLength = input.length;
+     let converted = ''
+    
+     if (inputLength >= 3) {
+         hundreds(input[inputLength - 3])
+     }
+    
+     if (inputLength >= 2) {
+         tens(input[inputLength - 2]);
+     }
+    
+     if (inputLength >= 1) {
+         units(input[inputLength - 1])
+     }
+    
+     function units(input) {
+         if (input == 1) {
+             converted += 'bir '
+         } else if (input == 2) {
+             converted += 'iki '
+         } else if (input == 3) {
+             converted += 'üc '
+         } else if (input == 4) {
+             converted += 'dord '
+         } else if (input == 5) {
+             converted += 'bes '
+         } else if (input == 6) {
+             converted += 'alti '
+         } else if (input == 7) {
+             converted += 'yeddi '
+         } else if (input == 8) {
+             converted += 'sekkiz '
+         } else if (input == 9) {
+             converted += 'doqquz '
+         }
+     };
+    
+     function tens(input) {
+         if (input == 1) {
+             converted += 'on '
+         } else if (input == 2) {
+             converted += 'iyirmi '
+         } else if (input == 3) {
+             converted += 'otuz '
+         } else if (input == 4) {
+             converted += 'qirx '
+         } else if (input == 5) {
+             converted += 'elli '
+         } else if (input == 6) {
+             converted += 'altmis '
+         } else if (input == 7) {
+             converted += 'yetmis '
+         } else if (input == 8) {
+             converted += 'seksen '
+         } else if (input == 9) {
+             converted += 'doxsan '
+         }
+     };
+    
+     function hundreds(input) {
+         if (input[inputLength - 3] == 2) {
+             units(input[inputLength - 3])
+         } else if (input[inputLength - 3] == 3) {
+             units(input[inputLength - 3])
+         } else if (input[inputLength - 3] == 4) {
+             units(input[inputLength - 3])
+         } else if (input[inputLength - 3] == 5) {
+             units(input[inputLength - 3])
+         } else if (input[inputLength - 3] == 6) {
+             units(input[inputLength - 3])
+         } else if (input[inputLength - 3] == 7) {
+             units(input[inputLength - 3])
+         } else if (input[inputLength - 3] == 8) {
+             units(input[inputLength - 3])
+         } else if (input[inputLength - 3] == 9) {
+             units(input[inputLength - 3])
+         }
+    
+         converted += 'yüz '
+     };
+    
+     console.log(converted)
+    </script> -->
+
+
+    <!-- task7 -->
+    <!-- <script>
+    const num = Number(prompt("Eded daxil edin: "));
+    function isWholeNumber(num){
+        let output = 'Eded tamdir!';
+
+        if (Math.floor(num) !== num){
+            output = 'Eded tam deil!';
+        };
+
+        console.log(output);
+    };
+
+    isWholeNumber(num);
+    </script> -->
+
+
+
+
+    <!-- task8 -->
+    <!-- <script>
+        
+     function findLength(word){
+         console.log(word.trim().split(' ').length);
+     }
+    
+     findLength('  Sozler  ');
+    </script> -->
+
+
+
+
+    <!-- task9 -->
+    <!-- <script>
+     function removeSpaces(text){
+        console.log(text.replaceAll(' ', ''));
+     };
+
+     removeSpaces('Hello World Hello World!');
+    </script> -->
+
+
+
+
+    <!-- task10 -->
+    <!-- <script>
+    function capitalize(sentence) {
+    	let capitalizedStr =
+    		sentence[0].toUpperCase() + sentence.slice(1);
+    	console.log(capitalizedStr);
+    }
+
+    capitalize("lorem ipsum dolores");
+    </script> -->
+
+
+
+
+    <!-- task11 -->
+    <!-- <script>
+        function arraysAreIdentical(arr1, arr2) {
+            // Eger arraylar ferqli uzunluqdadirsa eyni ola bilmez
+            if (arr1.length !== arr2.length) {
+                return false;
+            }
+        
+            for (var i = 0; i < arr1.length; i++) {
+                if (arr1[i] !== arr2[i]) {
+                    return false;
+                }
+            }
+        
+            // Eger butun elementler identificdirse true qaytar
+            return true;
+        }
+        
+        function checkIdentityOnEnter(event) {
+
+            if (event.keyCode === 13) {
+                checkIdentity();
+            }
+        }
+        
+        function checkIdentity() {
+            var input1 = prompt("1-ci array daxil edin (vergul ile):");
+            var input2 = prompt("2-ci array daxil edin (vergul ile):");
+        
+            // vergul ile ayrilmis stringleri array cevirme
+            var array1 = input1.split(",").map(function(item) {
+                return parseInt(item.trim());
+            });
+        
+            var array2 = input2.split(",").map(function(item) {
+                return parseInt(item.trim());
+            });
+        
+            if (arraysAreIdentical(array1, array2)) {
+                alert("Arraylar eynidir");
+            } else {
+                alert("Arraylar ferqldir");
+            }
+        }
+        
+        document.addEventListener('keydown', checkIdentityOnEnter);
+        </script> -->
+
+
+
+
+    <!-- task12 -->
+    <!-- <script>
+     function sort(arr, sort) {
+     	let count = arr.length - 1;
+
+     	while (count > 0) {
+     		let loopCount = 0;
+
+     		if (sort == "artan") {
+     			for (let i = loopCount; i < arr.length; i++) {
+     				if (i != arr.length - 1 && arr[i] > arr[i + 1]) {
+     					swap(arr, i);
+     				}
+     			}
+     		} else if (sort === "azalan") {
+     			for (let i = loopCount; i < arr.length; i++) {
+     				if (i != arr.length - 1 && arr[i] < arr[i + 1]) {
+     					swap(arr, i);
+     				}
+     			}
+     		} else {
+     			return;
+     		}
+
+    		loopCount++;
+    		count--;
+    	}
+
+     	console.log(arr);
+       }
+
+     function swap(arr, i) {
+     	let swap = arr[i];
+     	arr[i] = arr[i + 1];
+     	arr[i + 1] = swap;
+     }
+
+     sort([3, 1, 5, 9, 2, 7, 4], "azalan");
+
+    </script> -->
+
+
+     <!-- task13 -->
+     <!-- <script>
+     function replaceAdna(text){
+         console.log(text.replaceAll('ADNA', 'ADNSU'));
+     };
+    
+     replaceAdna('salam ADNA salam ADNA')
+    </script> -->
+
+
+
+     <!-- task14 -->
+     <!-- <script>
+     function countSalary(hourSalary, weekHours){
+         if (weekHours > 40){
+             hourSalary = hourSalary * 2;
+         }
+    
+         const monthlySalary = (hourSalary * weekHours) * 4;
+    
+         console.log(monthlySalary);
+     };
+    
+     countSalary(4, 41);
+    </script> -->
+
+
+
+    <!-- task15 -->
+    <!-- <script>
+     function findSumOfDigits(n){
+         let total = 0;
+         let numString = n.toString();
+    
+         for (let num of numString){
+             total += Number(num);
+         }
+    
+         console.log(total);
+     };
+    
+     findSumOfDigits(534);
+    </script> -->
+
+
+
+
+   <!-- task16 -->
+   <!-- <script>
+    var a = prompt("Birinci metni daxil edin")
+    var b = prompt("Ikinci netni daxil eidn")
+
+    function similarityScore(a, b) {
+    let longer = a;
+    let shorter = b;
+    if (a.length < b.length) {
+        longer = b;
+        shorter = a;
+    }
+    let longerLength = longer.length;
+    if (longerLength === 0) {
+        return 1.0;
+    }
+    let matchCount = 0;
+    for (let i = 0; i < longerLength; i++) {
+        if (longer[i] === shorter[i]) {
+            matchCount++;
+        }
+    }
+    return Math.round((matchCount / longerLength) * 100)
+    }
+
+    alert(similarityScore(a,b)+"%");
+    </script> -->
+
+     <!-- task17 -->
+      <!-- <script>
+      function duplicateFinder(text){
+          const textArr = text.split(' ');
+          let duplicatedWords = [];
+          let count = 0;
+    
+          for (let i = 0; i < textArr.length; i++){
+              for (let j = i + 1; j < textArr.length; j++){
+                  if (textArr[i] == textArr[j] && !duplicatedWords.includes(textArr[i])){
+                      duplicatedWords.push(textArr[i]);
+                      count++;
+                  }
+              };
+          };
+    
+          console.log(duplicatedWords);
+          console.log(count);
+      }
+    
+      duplicateFinder('salam hesen necesen salam necesen necesen salam salam salam hesen');
+     </script>  -->
+
+</body>
+</html>

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var a=8;
+        if(a%2==0)
+        {
+            alert("cut")
+        }
+        else
+        {
+            alert("tek")
+        }
+    </script>
+    <script>
+        alert(Math.max(2,35,6));
+        alert(Math.min(2,35,6))
+    </script>
+    <script>
+        let sum = 0;
+        for (let i = 1; i <= 10; i++) {
+         sum += i;
+        }
+
+        let product = 1;
+        for (let i = 1; i <= 10; i++) {
+            product *= i;
+        }
+
+        console.log("cem", sum);
+        console.log("hasil", product);
+    </script>
+    <script>
+        let cem = 0;
+        let hasil = 1;
+
+        for (let i = 2; i <= 100; i += 2) {
+            cem += i;
+            hasil *= i;
+        }
+
+        console.log("Cemi 1-100 qeder", cem);
+        console.log("Hasili 1-100 qeder", hasil);
+    </script>
+    <script>
+        let bolunenler = [];
+        let a = 0;
+
+        for (let i = 100; i <= 999; i++) {
+            if (i % 7 === 0 && i % 8 === 0) {
+                bolunenler[a] = i;
+                a++;
+            }
+            }
+
+
+            console.log("7 ve 8 bolunen 3 reqemli ededler:", bolunenler);
+    </script>
+       <script>
+        let bolunenler = [];
+        let a = 0;
+
+
+        for (let i = 100; i <= 999; i++) {
+            if (i % 7 === 0 && i % 8 === 0) {
+                bolunenler[a] = i;
+                a++;
+            }
+        }
+
+        
+        let sum = 0;
+        for (let j = 0; j < bolunenler; j++) {
+            sum += bolunenler[j];
+        }
+
+       
+        console.log("7 ve 8 bolunen 3 reqemli ededler cemi", sum);
+       </script>
+        <script>
+            let bolunenler = [];
+            let a = 0;
+    
+            for (let i = 100; i <= 999; i++) {
+                if (i % 7 === 0 && i % 8 === 0) {
+                    bolunenler[a] = i;
+                    a++;
+                    break;
+                }
+                }
+    
+    
+                console.log("7 ve 8 bolunen 3 reqemli ededler ilk:", bolunenler);
+        </script>
+         <script>
+            let bolunenler = [];
+            let a = 0;
+    
+            for (let i = 999; i >= 100; i--) {
+                if (i % 7 === 0 && i % 8 === 0) {
+                    bolunenler[a] = i;
+                    a++;
+                    break;
+                }
+                }
+    
+    
+                console.log("7 ve 8 bolunen 3 reqemli ededler son:", bolunenler);
+        </script>
+        <script>
+            let sum = 0;
+            for (let i = 100; i <= 999; i++) {
+                sum += i;
+            }
+
+            
+            let umumi = 999 - 100 + 1; 
+
+            let orta = sum / totalCount;
+
+            console.log("3 reqemli ededlerin ededi ortasi", orta);
+        </script>
+       <h2>Calculator</h2>
+
+       <form id="calculatorForm">
+         <label for="num1">Birinci ededi daxil edin</label>
+         <input type="number" id="num1" required><br><br>
+         
+         <label for="num2">Ikincie ededi daxil edin</label>
+         <input type="number" id="num2" required><br><br>
+         
+         <label for="operation">Emeliyyati secin</label>
+         <select id="operation">
+           <option value="add">Toplama</option>
+           <option value="subtract">Cixma</option>
+           <option value="multiply">Vurma</option>
+           <option value="divide">Bolme</option>
+         </select><br><br>
+         
+         <button type="button" onclick="calculate()">Hesablamaq</button>
+       </form>
+       
+       <div id="result"></div>
+       
+       <script>
+       function calculate() {
+         const num1 = parseFloat(document.getElementById("num1").value);
+         const num2 = parseFloat(document.getElementById("num2").value);
+         const operation = document.getElementById("operation").value;
+         let result;
+       
+         switch (operation) {
+           case "add":
+             result = num1 + num2;
+             break;
+           case "subtract":
+             result = num1 - num2;
+             break;
+           case "multiply":
+             result = num1 * num2;
+             break;
+           case "divide":
+             if (num2 !== 0) {
+               result = num1 / num2;
+             } else {
+               alert("0-a bolmek olmaz");
+               result = null;
+             }
+             break;
+           default:
+             alert("Sehv emeliyyat zehmet olmasa duzgun emeliyyati secin.");
+             result = null;
+         }
+       
+         if (result !== null) {
+           document.getElementById("result").innerHTML = "Netice: " + result;
+         }
+       }
+       </script>
+       <br><br>
+      
+    
+</body>
+</html>
