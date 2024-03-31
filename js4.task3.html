@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dynamic Styling</title>
+<style>
+  #styledDiv {
+    width: 100px;
+    height: 100px;
+    border: 1px solid black;
+    margin: 10px;
+    padding: 10px;
+  }
+</style>
+</head>
+<body>
+
+<form id="styleForm">
+  <label for="width">Width:</label>
+  <input type="number" id="width" name="width" value="100">
+  
+  <label for="height">Height:</label>
+  <input type="number" id="height" name="height" value="100">
+
+  <label for="borderWidth">Border Width:</label>
+  <input type="number" id="borderWidth" name="borderWidth" value="1">
+  <br><br>
+
+  <label for="borderStyle">Border Style:</label>
+  <select id="borderStyle" name="borderStyle">
+    <option value="solid">Solid</option>
+    <option value="dashed">Dashed</option>
+    <option value="dotted">Dotted</option>
+  </select>
+
+  <label for="borderColor">Border Color:</label>
+  <input type="color" id="borderColor" name="borderColor" value="#000000">
+
+  <label for="textColor">Text Color:</label>
+  <input type="color" id="textColor" name="textColor" value="#000000">
+
+  <label for="bgColor">Background Color:</label>
+  <input type="color" id="bgColor" name="bgColor" value="#ffffff">
+
+  <button type="button" onclick="applyStyles()">OK</button>
+</form>
+
+<div id="styledDiv">Styled Div</div>
+
+<script>
+function applyStyles() {
+  var width = document.getElementById("width").value + "px";
+  var height = document.getElementById("height").value + "px";
+  var borderWidth = document.getElementById("borderWidth").value + "px";
+  var borderStyle = document.getElementById("borderStyle").value;
+  var borderColor = document.getElementById("borderColor").value;
+  var textColor = document.getElementById("textColor").value;
+  var bgColor = document.getElementById("bgColor").value;
+
+  var styledDiv = document.getElementById("styledDiv");
+  styledDiv.style.width = width;
+  styledDiv.style.height = height;
+  styledDiv.style.borderWidth = borderWidth;
+  styledDiv.style.borderStyle = borderStyle;
+  styledDiv.style.borderColor = borderColor;
+  styledDiv.style.color = textColor;
+  styledDiv.style.backgroundColor = bgColor;
+}
+</script>
+
+</body>
+</html>

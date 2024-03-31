@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fruit Information</title>
+</head>
+<body>
+
+<h2>List of Fruits</h2>
+<ul id="fruitList">
+  <li onclick="toggleInfo(this, 'Apples')">Apples</li>
+  <li onclick="toggleInfo(this, 'Apricot')">Apricot</li>
+  <li onclick="toggleInfo(this, 'Banana')">Banana</li>
+  <li onclick="toggleInfo(this, 'Blackberry')">Blackberry</li>
+  <li onclick="toggleInfo(this, 'Blueberry')">Blueberry</li>
+  <!-- Add more fruit items as needed -->
+</ul>
+
+<script>
+function toggleInfo(clickedElement, fruit) {
+  var infoParagraph = document.createElement("p");
+  switch(fruit) {
+    case "Apples":
+      infoParagraph.innerHTML = "Apples are a type of fruit.";
+      break;
+    case "Apricot":
+      infoParagraph.innerHTML = "Apricot is a sweet, yellow-orange fruit.";
+      break;
+    case "Banana":
+      infoParagraph.innerHTML = "Bananas are elongated, edible fruits with a yellow outer peel.";
+      break;
+    default:
+      infoParagraph.innerHTML = "No information available for this fruit.";
+  }
+  
+  var existingInfo = clickedElement.nextElementSibling;
+  if (existingInfo && existingInfo.tagName.toLowerCase() === "p") {
+    // melumat varsa silsin
+    existingInfo.remove();
+  } else {
+    var infoList = document.getElementById("fruitList");
+    infoList.insertBefore(infoParagraph, clickedElement.nextElementSibling);
+  }
+}
+</script>
+
+</body>
+</html>
