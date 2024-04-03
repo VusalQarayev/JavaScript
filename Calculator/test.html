@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        /* Add your CSS styles here if needed */
+    </style>
+</head>
+<body>
+    <input type="text" id="result" disabled>
+
+<div id="cal">
+    <button class="brut clear" onclick="clr()">C</button>
+    <button class="brut backspace" onclick="backspace()">BS</button>
+    <input type="text" class="ipt input" placeholder="0" disabled>
+    <button class="but but7 number" onclick="dis('7')">7</button>
+    <button class="but but8 number" onclick="dis('8')">8</button>
+    <button class="but number" onclick="dis('9')">9</button>
+    <button class="but operator" onclick="dis('+')">+</button>
+    <button class="but number" onclick="dis('4')">4</button>
+    <button class="but number" onclick="dis('5')">5</button>
+    <button class="but number" onclick="dis('6')">6</button>
+    <button class="but operator" onclick="dis('-')">-</button>
+    <button class="but number" onclick="dis('1')">1</button>
+    <button class="but number" onclick="dis('2')">2</button>
+    <button class="but number" onclick="dis('3')">3</button>
+    <button class="but operator" onclick="dis('*')">*</button>
+    <button class="but number" onclick="dis('0')">0</button>
+    <button class="but decimal" onclick="dis('.')">.</button>
+    <button class="but equal beraber" onclick="solve()">=</button>
+    <button class="but operator" onclick="dis('/')">/</button>
+</div>
+
+<script>
+document.addEventListener("keydown", myFunction);
+
+function myFunction(event) { 
+    if (event.key == '0' || event.key == '1' 
+        || event.key == '2' || event.key == '3' 
+        || event.key == '4' || event.key == '5' 
+        || event.key == '6' || event.key == '7' 
+        || event.key == '8' || event.key == '9' 
+        || event.key == '+' || event.key == '-' 
+        || event.key == '*' || event.key == '/') {
+        dis(event.key);
+    } else if (event.key === 'Enter') {
+        solve();
+    }
+}
+
+function dis(val) { 
+    document.getElementById("result").value += val; 
+}
+
+function solve() { 
+    let x = document.getElementById("result").value;
+    let y = math.evaluate(x);
+    document.getElementById("result").value = y;
+} 
+
+function clr() { 
+    document.getElementById("result").value = ""; 
+} 
+
+function backspace() {
+    let currentValue = document.getElementById("result").value;
+    document.getElementById("result").value = currentValue.slice(0, -1);
+}
+</script>
+</body>
+</html>
