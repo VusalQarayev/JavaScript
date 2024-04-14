@@ -1,0 +1,24 @@
+*{
+    box-sizing: border-box;
+}
+body{
+    background-color: rgb(112, 120, 126);
+}
+#main {
+    width: 400px;
+    height: 150px;
+    background-color: aqua;
+    margin: auto;
+    text-align: center;
+}
+
+#mb{
+    width: 60px;
+    height: 25px;
+    background-color: brown;
+    cursor: pointer;
+    
+}
+#mb:hover{
+    background-color: burlywood;
+}

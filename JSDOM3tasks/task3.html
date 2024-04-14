@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager</title>
+    <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 50px;
+    }
+
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .task-input {
+      width: 200px;
+      margin-right: 20px;
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .add-button {
+      padding: 5px 10px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .task-div {
+      width: 200px;
+      height: 150px;
+      border: none;
+      background-color: #f0f0f0; 
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+      padding: 15px;
+      margin-bottom: 20px;
+      overflow-y: auto;
+      position: relative;
+    }
+
+    .task-div:first-child { 
+      background-color: #fff;
+    }
+
+    .task-div strong {
+      font-weight: bold;
+      font-size: 18px;
+      color: #333; 
+      margin-bottom: 10px; 
+    }
+
+    .task-item { 
+      background-color: #eee; 
+      padding: 5px;
+      border-radius: 5px;
+      margin-bottom: 5px;
+      cursor: pointer;
+    }
+    .dhash{
+        display: flex;
+    }
+    .hash{
+        display: inline-block;
+        margin: 0px 80px 50px 100px;
+    }
+    .arrow {
+      width: 15px; 
+      height: 0;
+      margin: 15px;
+      /* border-left: 10px solid transparent; 
+      border-right: 10px solid transparent; 
+      border-bottom: 20px solid #ccc;  */
+      cursor: pointer;
+    }
+
+  </style>
+    </style>
+</head>
+<body>
+    <div class="container">
+        <input type="text" id="taskInput" class="task-input" placeholder="Enter Task">
+        <button onclick="addTask()" class="add-button">Add Task</button>
+    </div>
+    <div class="dhash">
+        <h1 class="hash">To Do</h1>
+        <h1 class="hash">In Progress</h1>
+        <h1 class="hash">Done</h1>
+    </div>
+    
+    <div class="container">
+        
+        <div class="task-div" id="toDoTasks">
+        </div>
+        <div class="arrow" onclick="moveTask('toDoTasks', 'inProgressTasks')">~~></div> 
+        <div class="divider"></div>
+        <div class="arrow" onclick="moveTask('inProgressTasks', 'toDoTasks')"><~~</div> 
+        
+        <div class="task-div" id="inProgressTasks">
+        </div>
+        <div class="arrow" onclick="moveTask('inProgressTasks', 'completedTasks')">~~></div> 
+        <div class="divider"></div>
+        <div class="arrow" onclick="moveTask('completedTasks', 'inProgressTasks')"><~~</div> 
+        
+        <div class="task-div" id="completedTasks">
+        </div>
+    </div>
+
+    <script>
+        function addTask() {
+            const taskInput = document.getElementById('taskInput');
+            const taskName = taskInput.value.trim();
+
+            if (taskName) {
+                const taskDiv = document.createElement('div');
+                taskDiv.textContent = taskName;
+                taskDiv.classList.add('task-item');
+                taskDiv.style.cursor = 'pointer';
+                taskDiv.onclick = moveTask;
+
+                const toDoTasks = document.getElementById('toDoTasks');
+                toDoTasks.appendChild(taskDiv);
+
+                taskInput.value = '';
+            } else {
+                alert('Please enter a task.');
+            }
+        }
+
+        function moveTask(fromId, toId) {
+            const fromDiv = document.getElementById(fromId);
+            const toDiv = document.getElementById(toId);
+
+            if (fromDiv.childNodes.length > 1) {
+                const task = fromDiv.childNodes[1].textContent;
+                fromDiv.removeChild(fromDiv.childNodes[1]);
+                toDiv.innerHTML += `<div>${task}</div>`;
+            }
+        }
+    </script>
+</body>
+</html>

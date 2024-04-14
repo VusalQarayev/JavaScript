@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volume Control</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: sans-serif;
+        }
+        .container {
+            background-color: #f0f0f0;
+            padding: 30px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+        }
+        .volume-control {
+            display: flex;
+            align-items: center;
+        }
+        .volume-indicator {
+            position: relative;
+            width: 200px;
+            height: 10px;
+            background-color: #ddd;
+            border-radius: 5px;
+            cursor: pointer; /* Set cursor to pointer on hover */
+            overflow: hidden;
+            margin: 0 10px;
+        }
+        .volume-indicator::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: var(--volume-width, 0%); /* Initial width is 0 */
+            height: 100%;
+            background-color: blue;
+            border-radius: inherit;
+            transition: width 0.2s ease-in-out; /* Add smooth transition */
+        }
+        .volume-level {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 14px;
+            font-weight: bold;
+        }
+        .button {
+            padding: 5px 10px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <p>Volume Control</p>
+        <div class="volume-control">
+            <button class="button">-</button>
+            <div class="volume-indicator">
+                <span class="volume-level">0</span>
+            </div>
+            <button class="button">+</button>
+        </div>
+    </div>
+    <script>
+        const volumeIndicator = document.querySelector('.volume-indicator');
+        const volumeLevel = document.querySelector('.volume-level');
+        const audio = new Audio(); // Create a new audio element
+
+        let currentVolume = 0; // Track current volume
+
+        // Update volume level and indicator width
+        const updateVolume = (change) => {
+            currentVolume = Math.max(0, Math.min(100, currentVolume + change)); // Clamp volume between 0-100
+            volumeLevel.textContent = `${Math.round(currentVolume)}%`; // Round to remove decimal digits
+            volumeIndicator.style.setProperty('--volume-width', `${currentVolume}%`);
+            audio.volume = currentVolume / 100;
+
+            // Change background color based on volume level
+            if (currentVolume <= 50) {
+                volumeIndicator.style.backgroundColor = `rgba(255, 255, 0, ${currentVolume / 50})`; // Yellow color
+            } else {
+                volumeIndicator.style.backgroundColor = `rgba(255, 0, 0, ${(currentVolume - 50) / 50})`; // Red color
+            }
+        }
+
+        // Button click events
+        document.querySelectorAll('.button').forEach(button => {
+            button.addEventListener('click', () => {
+                const change = button.textContent === '-' ? -5 : 5; // Change based on button text
+                updateVolume(change);
+            });
+        });
+
+        // Click event on volume indicator
+        volumeIndicator.addEventListener('click', (event) => {
+            const boundingRect = volumeIndicator.getBoundingClientRect();
+            const offsetX = event.clientX - boundingRect.left;
+            const width = (offsetX / boundingRect.width) * 100;
+            updateVolume(width - currentVolume);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="task1.css">
+    <title>Document</title>
+</head>
+<body>
+    <div id="main">
+        <p id="mp">Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
+        <h1 id="mh1">Ds.Cupitade</h1>
+        <button id="mb" onclick="deyisdir()">Change</button>
+    </div>
+          <!-- <script>
+            // arraylar sozler ve adlar
+            var sozler = [
+              "Don't cry because it's over, smile because it happened.",
+              "The future belongs to those who believe in the beauty of their dreams.",
+              "I've learned that people will forget what you said, people will forget what you did",
+              "In the end, it's not the years in your life that count. It's the life in your years.",
+              "Success is not final, failure is not fatal: It is the courage to continue that counts.",
+              "The only way to do great work is to love what you do.",
+              "Believe you can and you're halfway there."
+            ];
+          
+            var adlar = [
+              "John",
+              "Fred",
+              "Ashton",
+              "Fizuli",
+              "Babek",
+              "Aslan",
+              "Teymur"
+            ];
+          
+            // islenmis sozler ve adlar
+            var islenmiSoz = sozler.slice(); // esas arrayi kopyalamaq
+            var islenmisAd = adlar.slice(); // esas arrayi kopyalamaq
+          
+            function deyisdir() {
+              // islenib ya yox yoxlamaq
+              if (islenmiSoz.length === 0 || islenmisAd.length === 0) {
+                // arraylari oz veziyyetine qaytarmaq
+                islenmiSoz = sozler.slice();
+                islenmisAd = adlar.slice();
+              }
+          
+              // random indeks yaratmaq
+              var randomsozindeks = Math.floor(Math.random() * islenmiSoz.length);
+              var randomadindeks = Math.floor(Math.random() * islenmisAd.length);
+          
+              // menmsetmek indeksi
+              var randomsoz = islenmiSoz[randomsozindeks];
+              var randomad = islenmisAd[randomadindeks];
+          
+              // islenmisleri cixarmaq
+              islenmiSoz.splice(randomsozindeks, 1);
+              islenmisAd.splice(randomadindeks, 1);
+          
+              var metn = document.getElementById("mp");
+              var metn2 = document.getElementById("mh1");
+              metn.textContent = randomsoz;
+              metn2.textContent = randomad;
+            }
+          </script> -->
+
+
+          <script>
+            // obyekt daxilinde soz ve ad arraylari
+            var aforizmler = {
+              sozler: [
+                "Don't cry because it's over, smile because it happened.",
+                "The future belongs to those who believe in the beauty of their dreams.",
+                "I've learned that people will forget what you said, people will forget what you did",
+                "In the end, it's not the years in your life that count. It's the life in your years.",
+                "Success is not final, failure is not fatal: It is the courage to continue that counts.",
+                "The only way to do great work is to love what you do.",
+                "Believe you can and you're halfway there."
+              ],
+              adlar: [
+                "John",
+                "Fred",
+                "Ashton",
+                "Fizuli",
+                "Babek",
+                "Aslan",
+                "Teymur"
+              ]
+            };
+          
+            // istifade olunmus indeksleri yoxlamaq
+            var islenmisindeksler = {
+              sozindeks: 0,
+              adindeks: 0
+            };
+          
+            function deyisdir() {
+              // adlar ve sozlerden indeksleri goturmek
+              var sozindeks = islenmisindeksler.sozindeks;
+              var adindeks = islenmisindeksler.adindeks;
+          
+              // soz ve ada uygun indeksleri secmek
+              var randomsoz = aforizmler.sozler[sozindeks];
+              var randomad = aforizmler.adlar[adindeks];
+          
+              // indeksleri artiririq
+              islenmisindeksler.sozindeks = (sozindeks + 1) % aforizmler.sozler.length;
+              islenmisindeksler.adindeks = (adindeks + 1) % aforizmler.adlar.length;
+          
+              // random sozle adi ekrana veririk
+              var metn = document.getElementById("mp");
+              var metn2 = document.getElementById("mh1");
+              metn.textContent = randomsoz;
+              metn2.textContent = randomad;
+            }
+          </script>
+          
+          
+</body>
+</html>
