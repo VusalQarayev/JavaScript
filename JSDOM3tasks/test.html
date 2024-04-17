@@ -1,114 +1,148 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Volume Control</title>
+    <title>Sehifeler</title>
     <style>
-        body {
+        .vereqler {
             display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            font-family: sans-serif;
+            list-style: none;
+            padding: 0;
         }
-        .container {
-            background-color: #f0f0f0;
-            padding: 30px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
+
+        .vereqler li {
+            margin: 0 5px;
         }
-        .volume-control {
-            display: flex;
-            align-items: center;
+
+        /* .page {
+      display: none;
+    } */
+        .page.active {
+            display: block;
         }
-        .volume-indicator {
-            position: relative;
-            width: 200px;
-            height: 10px;
-            background-color: #ddd;
-            border-radius: 5px;
-            cursor: pointer; /* Set cursor to pointer on hover */
-            overflow: hidden;
-            margin: 0 10px;
+
+        .disabled {
+            pointer-events: none;
+            opacity: 0.5;
         }
-        .volume-indicator::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: var(--volume-width, 0%); /* Initial width is 0 */
-            height: 100%;
-            background-color: blue;
-            border-radius: inherit;
-            transition: width 0.2s ease-in-out; /* Add smooth transition */
-        }
-        .volume-level {
-            position: absolute;
-            right: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 14px;
-            font-weight: bold;
-        }
-        .button {
-            padding: 5px 10px;
-            border: 1px solid #ddd;
-            border-radius: 3px;
-            cursor: pointer;
+
+        .disabled button {
+            display: none;
         }
     </style>
 </head>
+
 <body>
-    <div class="container">
-        <p>Volume Control</p>
-        <div class="volume-control">
-            <button class="button">-</button>
-            <div class="volume-indicator">
-                <span class="volume-level">0</span>
-            </div>
-            <button class="button">+</button>
+
+    <div id="seh-d">
+        <div class="sehler">
+            <!-- avtomatik loop ile yaranacaq sehifeler -->
         </div>
+        <ul class="vereqler">
+            <li><button type="button" id="prevPageBtn" onclick="evvelkiseh()">&lt;</button></li>
+            <li id="test"></li>
+            <li><button type="button" id="nextPageBtn" onclick="novbetiseh()">&gt;</button></li>
+        </ul>
     </div>
+
     <script>
-        const volumeIndicator = document.querySelector('.volume-indicator');
-        const volumeLevel = document.querySelector('.volume-level');
-        const audio = new Audio(); // Create a new audio element
+        let oldugumseh = 1;
+        const items = 10; // sehifedeki itemlerin sayi --deyise bilerik
+        const umumitem = 60; // umumi itemlerin sayi --deyise bilerik
+        const umumiseh = Math.ceil(umumitem / items); // umumi seh sayi
+        const sehconteyner = document.querySelector('.sehler');
+        const vereqconteyner = document.querySelector('.vereqler');
+        const prevPageBtn = document.getElementById('prevPageBtn');
+        const nextPageBtn = document.getElementById('nextPageBtn');
 
-        let currentVolume = 0; // Track current volume
+        function itemyarat(ilkindex, sonindex) {
+            let htmlitem = '';
+            for (let i = ilkindex; i <= sonindex; i++) {
+                htmlitem += `<li>Item ${i}</li>`;
+            }
+            return htmlitem;
+        }
 
-        // Update volume level and indicator width
-        const updateVolume = (change) => {
-            currentVolume = Math.max(0, Math.min(100, currentVolume + change)); // Clamp volume between 0-100
-            volumeLevel.textContent = `${Math.round(currentVolume)}%`; // Round to remove decimal digits
-            volumeIndicator.style.setProperty('--volume-width', `${currentVolume}%`);
-            audio.volume = currentVolume / 100;
+        function sehgoster(sehnomresi) {
+            const ilkindex = (sehnomresi - 1) * items + 1;
+            const sonindex = Math.min(sehnomresi * items, umumitem);
+            const htmlitem = itemyarat(ilkindex, sonindex);
+            sehconteyner.innerHTML = `<div class="page active" id="page${sehnomresi}"><ul>${htmlitem}</ul></div>`;
+        }
 
-            // Change background color based on volume level
-            if (currentVolume <= 50) {
-                volumeIndicator.style.backgroundColor = `rgba(255, 255, 0, ${currentVolume / 50})`; // Yellow color
+        function sehdeyis(sehnomresi) {
+            oldugumseh = sehnomresi;
+            sehgoster(oldugumseh);
+            sehcevirmeduyme();
+        }
+
+        function novbetiseh() {
+            if (oldugumseh < umumiseh) {
+                oldugumseh++;
+                sehgoster(oldugumseh);
+            }
+            checkPaginationButtons();
+        }
+
+        function evvelkiseh() {
+            if (oldugumseh > 1) {
+                oldugumseh--;
+                sehgoster(oldugumseh);
+            }
+            checkPaginationButtons();
+        }
+
+        function sehcevirmeduyme() {
+            const vereqlerButtons = document.querySelectorAll('.vereqler button');
+            vereqlerButtons.forEach(button => {
+                button.classList.remove('active');
+            });
+            vereqlerButtons[oldugumseh - 1].classList.add('active');
+
+        }
+
+        function duymeniyarat() {
+            let buttonsHTML = '';
+            for (let i = 1; i <= umumiseh; i++) {
+                buttonsHTML += `<li><button onclick="sehdeyis(${i})">${i}</button></li>`;
+            }
+            return buttonsHTML;
+        }
+
+        function duymenislet() {
+            sehgoster(oldugumseh);
+            test.innerHTML = `${duymeniyarat()}`;
+            sehcevirmeduyme();
+            checkPaginationButtons();
+        }
+
+        function checkPaginationButtons() {
+            if (oldugumseh === 1) {
+                console.log(prevPageBtn)
+                document.getElementById("prevPageBtn").color = "red"
+                prevPageBtn.classList.add('disabled');
+                prevPageBtn.disabled = true;
+
             } else {
-                volumeIndicator.style.backgroundColor = `rgba(255, 0, 0, ${(currentVolume - 50) / 50})`; // Red color
+                prevPageBtn.classList.remove('disabled');
+                prevPageBtn.disabled = false;
+            }
+            if (oldugumseh === umumiseh) {
+                nextPageBtn.classList.add('disabled');
+                nextPageBtn.disabled = true;
+            } else {
+                nextPageBtn.classList.remove('disabled');
+                nextPageBtn.disabled = false;
             }
         }
 
-        // Button click events
-        document.querySelectorAll('.button').forEach(button => {
-            button.addEventListener('click', () => {
-                const change = button.textContent === '-' ? -5 : 5; // Change based on button text
-                updateVolume(change);
-            });
-        });
 
-        // Click event on volume indicator
-        volumeIndicator.addEventListener('click', (event) => {
-            const boundingRect = volumeIndicator.getBoundingClientRect();
-            const offsetX = event.clientX - boundingRect.left;
-            const width = (offsetX / boundingRect.width) * 100;
-            updateVolume(width - currentVolume);
-        });
+
+        duymenislet();
     </script>
+
 </body>
+
 </html>
