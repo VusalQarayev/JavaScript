@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sehifeler</title>
+  <style>
+    .vereqler {
+      display: flex;
+      list-style: none;
+      padding: 0;
+    }
+    .vereqler li {
+      margin: 0 5px;
+    }
+    .vereqler button:disabled {
+      opacity: 0.5; /* Reduce opacity for disabled buttons */
+      cursor: not-allowed; /* Change cursor for disabled buttons */
+    }
+    /* .page {
+      display: none;
+    } */
+    .page.active {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+<div id="seh-d">
+  <div class="sehler">
+    <!-- avtomatik loop ile yaranacaq sehifeler -->
+  </div>
+  <ul class="vereqler">
+    <li><button id="evvelkiButton" onclick="evvelkiseh()">&lt;</button></li>
+    <!-- sehife cevirme butonlari -->
+    <li><button id="novbetiButton" onclick="novbetiseh()">&gt;</button></li>
+  </ul>
+</div>
+
+<script>
+  let oldugumseh = 3;
+  const items = 10; // sehifedeki itemlerin sayi --deyise bilerik
+  const umumitem = 60; // umumi itemlerin sayi --deyise bilerik
+  const umumiseh = Math.ceil(umumitem / items); // umumi seh sayi
+  const sehconteyner = document.querySelector('.sehler');
+  const vereqconteyner = document.querySelector('.vereqler');
+  const evvelkiButton = document.getElementById('evvelkiButton');
+  const novbetiButton = document.getElementById('novbetiButton');
+
+  function itemyarat(ilkindex, sonindex) {
+    let htmlitem = '';
+    for (let i = ilkindex; i <= sonindex; i++) {
+      htmlitem += `<li>Item ${i}</li>`;
+    }
+    return htmlitem;
+  }
+
+  function sehgoster(sehnomresi) {
+    const ilkindex = (sehnomresi - 1) * items + 1;
+    const sonindex = Math.min(sehnomresi * items, umumitem);
+    const htmlitem = itemyarat(ilkindex, sonindex);
+    sehconteyner.innerHTML = `<div class="page active" id="page${sehnomresi}"><ul>${htmlitem}</ul></div>`;
+  }
+
+  function sehdeyis(sehnomresi) {
+    oldugumseh = sehnomresi;
+    sehgoster(oldugumseh);
+    sehcevirmeduyme();
+  }
+
+  function novbetiseh() {
+    if (oldugumseh < umumiseh) {
+      oldugumseh++;
+      sehgoster(oldugumseh);
+      updateButtonStates();
+    }
+  }
+
+  function evvelkiseh() {
+    if (oldugumseh > 1) {
+      oldugumseh--;
+      sehgoster(oldugumseh);
+      updateButtonStates();
+    }
+  }
+
+  function updateButtonStates() {
+    if(oldugumseh === 1){
+        evvelkiButton.disabled = true;
+    }
+    else{
+        evvelkiButton.disabled = false;
+    }
+    if(oldugumseh === umumiseh){
+        novbetiButton.disabled = true;
+    }
+    else{
+        novbetiButton.disabled = false;
+    }
+  }
+
+  function sehcevirmeduyme() {
+    const vereqlerButtons = document.querySelectorAll('.vereqler button');
+    vereqlerButtons.forEach(button => {
+      button.classList.remove('active');
+    });
+    vereqlerButtons[oldugumseh - 1].classList.add('active');
+  }
+
+  function duymeniyarat() {
+    let buttonsHTML = '';
+    for (let i = 1; i <= umumiseh; i++) {
+      buttonsHTML += `<li><button onclick="sehdeyis(${i})">${i}</button></li>`;
+    }
+    return buttonsHTML;
+  }
+
+  function duymenislet() {
+    sehgoster(oldugumseh);
+    vereqconteyner.innerHTML = `<li><button onclick="evvelkiseh()">&lt;</button></li>${duymeniyarat()}<li><button onclick="novbetiseh()">&gt;</button></li>`;
+    sehcevirmeduyme();
+    updateButtonStates();
+  }
+
+  duymenislet();
+</script>
+
+</body>
+</html>
