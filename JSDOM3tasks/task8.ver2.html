@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #btns button {
+            border: 1px solid lightgray;
+            padding: 5px 8px;
+
+        }
+
+        .active {
+            background-color: rgb(54, 115, 154);
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <ul id="list"></ul>
+    <div id="btns"></div>
+
+    <script>
+        currentPage = 0
+        currentItemCount = 5;
+        itemsCount = 21;
+        numberButtons = ""
+        for (i = 0; i < Math.ceil(itemsCount / currentItemCount); i++) {
+            //numberButtons += <button class="btn number">${i + 1}</button>
+            numberButtons += `<button class="btn number">${i + 1}</button>`
+        }
+
+        //btns.innerHTML = <button class="btn" id="prev"><</button>${numberButtons}<button class="btn" id="next">></button>;
+        btns.innerHTML = `<button class="btn" id="prev">&lt;</button>${numberButtons}<button class="btn" id="next">&gt;</button>`;
+        function page() {
+            list.innerHTML = ""
+            for (i = currentPage * currentItemCount + 1; i <= currentItemCount * (currentPage + 1); i++) {
+                //list.innerHTML += <li>Item ${i}</li>
+                list.innerHTML += `<li>Item ${i}</li>`
+                if (i == itemsCount) {
+                    break;
+                }
+            }
+            document.querySelectorAll("#btns .number").forEach(elem => {
+                elem.classList.remove("active")
+            })
+            document.querySelectorAll("#btns .number")[currentPage].classList.add("active")
+            if (currentPage == 0) {
+                prev.disabled = true
+            }
+            else {
+                prev.disabled = false
+            }
+            if (currentPage == Math.floor(itemsCount / currentItemCount)) {
+                next.disabled = true
+            }
+            else {
+                next.disabled = false
+            }
+        }
+
+        page()
+
+        next.addEventListener("click", function () {
+            if (currentPage < Math.floor(itemsCount / currentItemCount)) {
+                currentPage++;
+                page()
+            }
+        })
+        prev.addEventListener("click", function () {
+            if (currentPage > 0) {
+                currentPage--;
+                page()
+            }
+        })
+        document.querySelectorAll("#btns .number").forEach((btn, index) => {
+            btn.addEventListener("click", function () {
+                currentPage = index
+                page()
+            })
+        })
+    </script>
+</body>
+
+</html>

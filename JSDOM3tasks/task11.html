@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.ilham {
+    margin-top: 20px;
+}
+
+.ilhamInputWrapper {
+    margin-bottom: 20px;
+}
+
+.ilhamInputWrapper input {
+    padding: 5px;
+    width: 200px;
+}
+
+.ilhamInputWrapper button {
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th, table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+    position: relative;
+}
+
+th.targetHeadCol, td.targetBodyCol {
+    text-align: center;
+}
+
+button.black {
+    background-color: #000;
+    color: #fff;
+}
+
+button.green {
+    background-color: green;
+    color: #fff;
+}
+
+button.yellow {
+    background-color: yellow;
+    color: #000;
+}
+
+button.red {
+    background-color: red;
+    color: #fff;
+}
+
+.tool {
+    position: absolute;
+    top: calc(100% + 5px);
+    left: 0;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    z-index: 1;
+}
+
+.tool button {
+    display: block;
+    width: 100%;
+    padding: 5px 0;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+}
+
+.tool button + button {
+    border-top: 1px solid #ddd;
+}
+
+.tool button:hover {
+    background-color: #f0f0f0;
+}
+
+    </style>
+</head>
+<body>
+			<div class="container">
+				<div class="ilham">
+
+					<div class="ilhamInputWrapper">
+						<input type="number" placeholder="say">
+						<button>Testiq et</button>
+					</div>
+
+					<table>
+						<thead>
+							<tr>
+								<th>No</th>
+								<th>S.A.A</th>
+								<th class="targetHeadCol">Netice</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>1</td>
+								<td>Ilham Eliyev Heyder</td>
+								<td class="targetBodyCol">0.0</td>
+							</tr>
+							<tr>
+								<td>2</td>
+								<td>Ilham Eliyev Heyder</td>
+								<td class="targetBodyCol">0.0</td>
+							</tr>
+							<tr>
+								<td>3</td>
+								<td>Ilham Eliyev Heyder</td>
+								<td class="targetBodyCol">0.0</td>
+							</tr>
+							<tr>
+								<td>4</td>
+								<td>Ilham Eliyev Heyder</td>
+								<td class="targetBodyCol">0.0</td>
+							</tr>
+							<tr>
+								<td>5</td>
+								<td>Ilham Eliyev Heyder</td>
+								<td class="targetBodyCol">0.0</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+        <script>
+            const ilhamInputWrapper = document.querySelector(".ilhamInputWrapper");
+const ilhamInput = document.querySelector(".ilham input");
+const ilhamBtn = document.querySelector(".ilham button");
+const targetHeadCol = document.querySelector(".targetHeadCol");
+const targetBodyCols = document.querySelectorAll(".targetBodyCol");
+let mark = 0;
+let rowMarks = [0, 0, 0, 0, 0];
+
+function closeAssessmentTool() {
+	document.querySelectorAll(".tool").forEach((tool) => tool.remove());
+}
+
+function openAssessmentTool(cell, row) {
+	closeAssessmentTool();
+	const tool = document.createElement("div");
+	tool.classList.add("tool");
+	const full = document.createElement("button");
+	full.textContent = "tam";
+	full.classList.add("green");
+	const part = document.createElement("button");
+	part.textContent = "natamam";
+	part.classList.add("yellow");
+	const zero = document.createElement("button");
+	zero.textContent = "0";
+	zero.classList.add("red");
+	tool.appendChild(full);
+	tool.appendChild(part);
+	tool.appendChild(zero);
+	cell.appendChild(tool);
+
+	tool.childNodes.forEach((btn) => {
+		btn.addEventListener("click", function () {
+			markPerson(row, cell, btn);
+		});
+	});
+}
+
+function createElements(length) {
+	mark = 10 / length;
+	for (let row = 1; row <= length; row++) {
+		const th = document.createElement("th");
+		th.innerText = `Is No${row}`;
+		targetHeadCol.before(th);
+		targetBodyCols.forEach((targetBodyCell, i) => {
+			const td = document.createElement("td");
+			const button = document.createElement("button");
+			button.innerText = `d/e`;
+			button.classList.add("black");
+			td.appendChild(button);
+			targetBodyCell.before(td);
+
+			button.addEventListener("click", () => {
+				openAssessmentTool(td, i + 1);
+			});
+		});
+	}
+}
+
+function markPerson(row, cell, btn) {
+	cell.children[0].textContent = btn.textContent;
+	cell.children[0].classList.remove(cell.children[0].classList.value);
+	cell.children[0].classList.add(btn.classList.value);
+
+	if (btn.className.includes("green")) {
+		rowMarks[row] += mark;
+	} else if (btn.className.includes("yellow")) {
+		rowMarks[row] += mark / 2;
+	} else {
+		rowMarks[row] += 0;
+	}
+
+	targetBodyCols[row - 1].textContent = rowMarks[row].toFixed(2);
+	cell.children[0].disabled = true;
+	closeAssessmentTool();
+}
+
+ilhamBtn.addEventListener("click", () => {
+	createElements(+ilhamInput.value);
+	ilhamInputWrapper.remove();
+});
+        </script>
+</body>
+</html>

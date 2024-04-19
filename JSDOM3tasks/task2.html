@@ -1,95 +1,99 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>To Do List</title>
 
   <style>
-     .completed {
+    .completed {
       text-decoration: line-through;
     }
+
     li .delete {
-      margin-left: 10px; 
+      margin-left: 10px;
     }
+
     li span {
-      margin-left: 10px; 
+      margin-left: 10px;
     }
-   
   </style>
 </head>
+
 <body>
 
-<h1>To Do List</h1>
+  <h1>To Do List</h1>
 
 
-<button id="addBtn">Add</button>
-<input type="text" id="newText">
-<ul id="myList" type="none"></ul>
+  <button id="addBtn">Add</button>
+  <input type="text" id="newText">
+  <ul id="myList" type="none"></ul>
 
-<script>
-  // yeni item yaratmaq
-  function itemyarat(text) {
-    var li = document.createElement("li");
-    var checkbox = document.createElement("input");
-    checkbox.type = "checkbox";
-    checkbox.className = "remove";
-    var txt = document.createElement("span");
-    txt.textContent = text;
-    var deleteBtn = createButton("delete", "Delete");
+  <script>
+    // yeni item yaratmaq
+    function itemyarat(text) {
+      var li = document.createElement("li");
+      var checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
+      checkbox.className = "remove";
+      var txt = document.createElement("span");
+      txt.textContent = text;
+      var deleteBtn = createButton("delete", "Delete");
 
-    li.appendChild(checkbox);
-    li.appendChild(txt);
-    li.appendChild(deleteBtn);
-    
+      li.appendChild(checkbox);
+      li.appendChild(txt);
+      li.appendChild(deleteBtn);
 
-    return li;
-  }
 
-  // button yaratmaq
-  function createButton(className, text) {
-    var btn = document.createElement("button");
-    btn.className = className;
-    btn.appendChild(document.createTextNode(text));
-    return btn;
-  }
-
-  // yeni item elave etmek
-  function listitemyarat() {
-    var text = document.getElementById("newText").value.trim();
-    if (text === "") return;
-
-    var li = itemyarat(text);
-    var list = document.getElementById("myList");
-    // yeni li elemti elae etmek
-    list.insertBefore(li, list.firstChild);
-
-    // metn yerini temizlemek
-    document.getElementById("newText").value = "";
-  }
-
-  // click eventleri
-  document.addEventListener("click", function(event) {
-    var target = event.target;
-    if (target.className === "remove") {
-      var li = target.parentElement;
-      if (target.checked) {
-        li.classList.add("completed");
-      } else {
-        li.classList.remove("completed");
-      }
-    } else if (target.className === "delete") {
-      var li = target.parentElement;
-      li.parentNode.removeChild(li);
+      return li;
     }
-  });
 
-  // add buttonu ucun event
-  document.getElementById("addBtn").addEventListener("click", listitemyarat);
+    // button yaratmaq
+    function createButton(className, text) {
+      var btn = document.createElement("button");
+      btn.className = className;
+      btn.appendChild(document.createTextNode(text));
+      return btn;
+    }
 
-  // Enter vurduqda islmeyi
-  document.getElementById("newText").addEventListener("keypress", function(event) {
-    if (event.key === "Enter") listitemyarat();
-  });
-</script>
+    // yeni item elave etmek
+    function listitemyarat() {
+      var text = document.getElementById("newText").value.trim();
+      if (text === "") return;
+
+      var li = itemyarat(text);
+      var list = document.getElementById("myList");
+      // yeni li elemti elae etmek
+      list.insertBefore(li, list.firstChild);
+
+      // metn yerini temizlemek
+      document.getElementById("newText").value = "";
+    }
+
+    // click eventleri
+    document.addEventListener("click", function (event) {
+      var target = event.target;
+      if (target.className === "remove") {
+        var li = target.parentElement;
+        if (target.checked) {
+          li.classList.add("completed");
+        } else {
+          li.classList.remove("completed");
+        }
+      } else if (target.className === "delete") {
+        var li = target.parentElement;
+        li.parentNode.removeChild(li);
+      }
+    });
+
+    // add buttonu ucun event
+    document.getElementById("addBtn").addEventListener("click", listitemyarat);
+
+    // Enter vurduqda islmeyi
+    document.getElementById("newText").addEventListener("keypress", function (event) {
+      if (event.key === "Enter") listitemyarat();
+    });
+  </script>
 
 </body>
+
 </html>
