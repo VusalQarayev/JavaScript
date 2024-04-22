@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDoList</title>
+    <style>
+        .vid {
+            margin: auto;
+            background-color: rgba(172, 178, 178, 0.411);
+            width: 40%;
+            height: 500px;
+            border: 1px solid grey;
+        }
+
+        .data {
+            padding: 20px;
+            margin: auto;
+            align-items: center;
+            display: flex;
+            justify-content: space-around;
+            height: 50px;
+            width: 80%;
+        }
+
+        .inp {
+            background-color: rgba(172, 178, 178, 0.411);
+            height: 100%;
+            width: 60%;
+            border: solid 1px grey;
+        }
+
+        .adder {
+            height: 100%;
+            width: 30%;
+        }
+
+
+        .task-item {
+            margin: 5px;
+            padding: 5px;
+            background-color: lightblue;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <div class="vid">
+        <div id="list-container">
+            <div class="data">
+                <input type="text" class="inp" id="item-input" placeholder="Tasks...">
+                <button class="adder" onclick="addItem()">Add</button>
+            </div>
+            <ul type="none" id="item-list">
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        function addItem() {
+            var inputValue = document.getElementById("item-input").value;
+
+            if (inputValue.trim() !== '') {
+                let listItem = document.createElement("li");
+                listItem.textContent = inputValue;
+                document.getElementById("item-list").appendChild(listItem);
+                document.getElementById("item-input").value = '';
+            }
+        }
+
+        function placeItem(category) {
+            var inputValue = document.getElementById("item-input").value;
+            if (inputValue.trim() !== '') {
+                let taskItem = document.createElement("div");
+                taskItem.textContent = inputValue;
+                taskItem.classList.add("task-item");
+
+                var container = document.querySelector("." + category);
+                container.appendChild(taskItem);
+
+                document.getElementById("item-input").value = '';
+            }
+        }
+    </script>
+
+</body>
+
+</html>

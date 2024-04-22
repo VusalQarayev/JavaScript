@@ -1,136 +1,164 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sehifeler</title>
-  <style>
-    .vereqler {
-      display: flex;
-      list-style: none;
-      padding: 0;
-    }
-    .vereqler li {
-      margin: 0 5px;
-    }
-    .vereqler button:disabled {
-      opacity: 0.5;
-      cursor: not-allowed; 
-    }
-    /* .page {
-      display: none;
-    } */
-    .page.active {
-      display: block;
-    }
-   
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 50px;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .task-input {
+            width: 200px;
+            margin-right: 20px;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .add-button {
+            padding: 5px 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .task-div {
+            width: 200px;
+            height: 150px;
+            border: none;
+            background-color: #f0f0f0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            margin-bottom: 20px;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .task-div:first-child {
+            background-color: #fff;
+        }
+
+        .task-div strong {
+            font-weight: bold;
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .task-item {
+            background-color: #eee;
+            padding: 5px;
+            border-radius: 5px;
+            margin-bottom: 5px;
+            cursor: pointer;
+        }
+
+        .task-item.selected {
+            background-color: yellow;
+        }
+
+        .dhash {
+            display: flex;
+        }
+
+        .hash {
+            display: inline-block;
+            margin: 0px 80px 50px 100px;
+        }
+
+        .arrow {
+            width: 15px;
+            height: 0;
+            margin: 15px;
+            cursor: pointer;
+        }
+
+    </style>
 </head>
 <body>
+    <div class="container">
+        <input type="text" id="taskInput" class="task-input" placeholder="Enter Task">
+        <button onclick="addTask()" class="add-button">Add Task</button>
+    </div>
+    <div class="dhash">
+        <h1 class="hash">To Do</h1>
+        <h1 class="hash">In Progress</h1>
+        <h1 class="hash">Done</h1>
+    </div>
 
-<div id="seh-d">
-  <div class="sehler">
-    <!-- avtomatik loop ile yaranacaq sehifeler -->
-  </div>
-  <ul class="vereqler">
-    <li ><button id="evvelkiButton" onclick="evvelkiseh()">&lt;</button></li>
-    
-    <li id="duymenlerLi"></li>
-    <li ><button id="novbetiButton" onclick="novbetiseh()">&gt;</button></li>
-  </ul>
-</div>
+    <div class="container">
+        <div class="task-div" id="toDoTasks"></div>
+        <div class="arrow" onclick="moveTask('toDoTasks', 'inProgressTasks')">~~></div>
+        <div class="divider"></div>
+        <div class="arrow" onclick="moveTask('inProgressTasks', 'toDoTasks')"><~~</div>
 
-<script>
-  let oldugumseh = 2;
-  const items = 10; // sehifedeki itemlerin sayi --deyise bilerik
-  const umumitem = 60; // umumi itemlerin sayi --deyise bilerik
-  const umumiseh = Math.ceil(umumitem / items); // umumi seh sayi
-  const sehconteyner = document.querySelector('.sehler');
-  const vereqconteyner = document.querySelector('.vereqler');
-  const evvelkiButton = document.getElementById('evvelkiButton');
-  const novbetiButton = document.getElementById('novbetiButton');
-  
-  const duymenlerLi = document.getElementById('duymenlerLi');
-  
+        <div class="task-div" id="inProgressTasks"></div>
+        <div class="arrow" onclick="moveTask('inProgressTasks', 'completedTasks')">~~></div>
+        <div class="divider"></div>
+        <div class="arrow" onclick="moveTask('completedTasks', 'inProgressTasks')"><~~</div>
 
-  function itemyarat(ilkindex, sonindex) {
-    let htmlitem = '';
-    for (let i = ilkindex; i <= sonindex; i++) {
-      htmlitem += `<li>Item ${i}</li>`;
-    }
-    return htmlitem;
-  }
+        <div class="task-div" id="completedTasks"></div>
+    </div>
 
-  function sehgoster(sehnomresi) {
-    const ilkindex = (sehnomresi - 1) * items + 1;
-    const sonindex = Math.min(sehnomresi * items, umumitem);
-    const htmlitem = itemyarat(ilkindex, sonindex);
-    sehconteyner.innerHTML = `<div class="page active" id="page${sehnomresi}"><ul>${htmlitem}</ul></div>`;
-  }
+    <script>
+        function addTask() {
+            const taskInput = document.getElementById('taskInput');
+            const taskName = taskInput.value.trim();
 
-  function sehdeyis(sehnomresi) {
-    oldugumseh = sehnomresi;
-    sehgoster(oldugumseh);
-    sehcevirmeduyme();
-    updateButtonStates();
-  }
+            if (taskName) {
+                const taskDiv = document.createElement('div');
+                taskDiv.textContent = taskName;
+                taskDiv.classList.add('task-item');
+                taskDiv.style.cursor = 'pointer';
+                taskDiv.onclick = function () {
+                    // Toggle selected class
+                    if (this.classList.contains('selected')) {
+                        this.classList.remove('selected');
+                    } else {
+                        this.classList.add('selected');
+                    }
+                };
 
-  function novbetiseh() {
-    if (oldugumseh < umumiseh) {
-      oldugumseh++;
-      sehgoster(oldugumseh);
-      updateButtonStates();
-    }
-  }
+                const toDoTasks = document.getElementById('toDoTasks');
+                toDoTasks.appendChild(taskDiv);
 
-  function evvelkiseh() {
-    if (oldugumseh > 1) {
-      oldugumseh--;
-      sehgoster(oldugumseh);
-      updateButtonStates();
-    }
-  }
+                taskInput.value = '';
+            } else {
+                alert('Please enter a task.');
+            }
+        }
 
-  function updateButtonStates() {
-    if(oldugumseh === 1){
-        evvelkiButton.disabled = true;
-    }
-    else{
-        evvelkiButton.disabled = false;
-    }
-    if(oldugumseh === umumiseh){
-        novbetiButton.disabled = true;
-    }
-    else{
-        novbetiButton.disabled = false;
-    }
-  }
+        function moveTask(fromId, toId) {
+            const fromDiv = document.getElementById(fromId);
+            const toDiv = document.getElementById(toId);
 
-  function sehcevirmeduyme() {
-    const vereqlerButtons = document.querySelectorAll('.vereqler button');
-    vereqlerButtons.forEach(button => {
-      button.classList.remove('active');
-    });
-    vereqlerButtons[oldugumseh - 1].classList.add('active');
-  }
+            // Find the selected task
+            const selectedTask = fromDiv.querySelector('.task-item.selected');
 
-  function duymeniyarat() {
-    let buttonsHTML = '';
-    for (let i = 1; i <= umumiseh; i++) {
-      buttonsHTML += `<button onclick="sehdeyis(${i})">${i}</button>`;
-    }
-    return buttonsHTML;
-  }
-
-  function duymenislet() {
-    sehgoster(oldugumseh);
-    duymenlerLi.innerHTML = duymeniyarat();
-    sehcevirmeduyme();
-    updateButtonStates();
-  }
-
-  duymenislet();
-</script>
-
+            if (selectedTask) {
+                fromDiv.removeChild(selectedTask);
+                toDiv.appendChild(selectedTask);
+                // Remove selected class after moving
+                selectedTask.classList.remove('selected');
+            } else {
+                alert('Please select a task to move.');
+            }
+        }
+    </script>
 </body>
 </html>
